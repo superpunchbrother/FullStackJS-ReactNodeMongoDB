@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/superpunchbrother/FullStackJS-ReactNodeMongoDB#readme",
   "dependencies": {
+    "ejs": "^2.5.5",
     "express": "^4.14.0",
     "mongodb": "^2.2.16",
     "react": "^15.4.1",
