@@ -22104,6 +22104,10 @@
 	  return window.history.pushState(obj, '', url);
 	};
 	
+	var onPopState = function onPopState(handler) {
+	  window.onpopstate = handler;
+	};
+	
 	var App = function (_React$Component) {
 	  _inherits(App, _React$Component);
 	
@@ -22123,7 +22127,7 @@
 	      api.fetchContest(contestId).then(function (contest) {
 	        _this.setState({
 	          currentContestId: contest.id,
-	          contests: _extends({}, _this.state.cotests, _defineProperty({}, contest.id, contest))
+	          contests: _extends({}, _this.state.contests, _defineProperty({}, contest.id, contest))
 	        });
 	      });
 	    }, _this.fetchContestList = function () {
@@ -22139,11 +22143,19 @@
 	
 	  _createClass(App, [{
 	    key: 'componentDidMount',
-	    value: function componentDidMount() {}
+	    value: function componentDidMount() {
+	      var _this2 = this;
+	
+	      onPopState(function (event) {
+	        _this2.setState({
+	          currentContestId: (event.state || {}).currentContestId
+	        });
+	      });
+	    }
 	  }, {
 	    key: 'componentWillUnmount',
 	    value: function componentWillUnmount() {
-	      // clean timers, listeners
+	      onPopState(null);
 	    }
 	  }, {
 	    key: 'currentContest',

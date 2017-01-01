@@ -21,4 +21,3 @@ router.get('/contests/:contestId', (req, res) => {
 });
 
 export default router;
-
